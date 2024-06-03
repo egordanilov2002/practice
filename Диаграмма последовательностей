@@ -1,0 +1,30 @@
+@startuml
+participant Buyer
+participant ClientApplication
+participant AccessControlSubsystem
+participant DataStorageSubsystem
+participant LoggingSubsystem
+
+Buyer -> ClientApplication: Login
+ClientApplication -> AccessControlSubsystem: Check Credentials
+AccessControlSubsystem -> ClientApplication: Valid
+ClientApplication -> LoggingSubsystem: Log Login Event
+ClientApplication -> Buyer: Login Successful
+
+Buyer -> ClientApplication: View Product
+ClientApplication -> DataStorageSubsystem: Fetch Product Details
+DataStorageSubsystem -> ClientApplication: Product Details
+ClientApplication -> Buyer: Display Product Details
+
+Buyer -> ClientApplication: Add to Cart
+ClientApplication -> DataStorageSubsystem: Add Product to Cart
+DataStorageSubsystem -> ClientApplication: Product Added
+ClientApplication -> LoggingSubsystem: Log Add to Cart Event
+ClientApplication -> Buyer: Product Added to Cart
+
+Buyer -> ClientApplication: Checkout
+ClientApplication -> DataStorageSubsystem: Process Order
+DataStorageSubsystem -> ClientApplication: Order Confirmation
+ClientApplication -> LoggingSubsystem: Log Checkout Event
+ClientApplication -> Buyer: Order Confirmed
+@enduml
