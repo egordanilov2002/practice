@@ -1,0 +1,57 @@
+@startuml
+title Уровень контейнеров интернет-магазина
+
+actor Покупатель as Buyer
+actor Администратор as Admin
+
+package "Интернет-магазин" {
+  [Клиентское приложение покупателя] as BuyerApp
+  [Клиентское приложение администратора] as AdminApp
+
+  package "Серверная часть" {
+    [Веб-сервер] as WebServer
+    [Приложение] as App
+    [API Шлюз] as ApiGateway
+    [Подсистема мониторинга] as MonitoringSubsystem
+    [Подсистема журналирования] as LoggingSubsystem
+  }
+
+  package "Хранение данных" {
+    [База данных пользователей] as UserDB
+    [База данных товаров] as ProductDB
+    [База данных заказов] as OrderDB
+    [База данных журналов] as LogDB
+  }
+
+  package "Внешние системы" {
+    [Система проведения платежей] as PaymentSystem
+    [Клиентское приложение продавца] as SellerApp
+    [Складская система] as WarehouseSystem
+    [Система логистики] as LogisticsSystem
+    [Аналитическая система] as AnalyticsSystem
+  }
+}
+
+Buyer --> BuyerApp : Использует
+Admin --> AdminApp : Использует
+
+BuyerApp --> ApiGateway : Запросы
+AdminApp --> ApiGateway : Запросы
+ApiGateway --> App : Прокси запросов
+
+App --> WebServer : Запросы/Ответы
+App --> MonitoringSubsystem : Мониторинг
+App --> LoggingSubsystem : Логи
+
+App --> UserDB : Данные пользователей
+App --> ProductDB : Данные товаров
+App --> OrderDB : Данные заказов
+LoggingSubsystem --> LogDB : Хранение логов
+
+App <-- PaymentSystem : Платежи
+App <-- SellerApp : Взаимодействие с продавцами
+App <-- WarehouseSystem : Наличие товаров
+App <-- LogisticsSystem : Доставка
+App <-- AnalyticsSystem : Аналитика
+
+@enduml
