@@ -1,0 +1,24 @@
+@startuml
+actor Buyer
+actor Admin
+
+Buyer --> (View Product)
+Buyer --> (Add to Cart)
+Buyer --> (Checkout)
+Buyer --> (Login)
+
+Admin --> (Login)
+Admin --> (Manage Product)
+Admin --> (View Reports)
+
+(View Product) --> (Data Storage Access)
+(Add to Cart) --> (Data Storage Access)
+(Checkout) --> (Data Storage Access)
+(Login) --> (Access Control Check)
+
+(Manage Product) --> (Data Storage Access)
+(View Reports) --> (Logging Access)
+
+(Data Storage Access) --> (Logging Event)
+(Access Control Check) --> (Logging Event)
+@enduml
