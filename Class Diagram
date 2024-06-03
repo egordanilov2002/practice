@@ -1,0 +1,56 @@
+@startuml
+class ClientApplication {
+    - clientId: String
+    - clientName: String
+    + login()
+    + viewProduct()
+    + addToCart()
+    + checkout()
+}
+
+class AdminApplication {
+    - adminId: String
+    - adminName: String
+    + login()
+    + manageProduct()
+    + viewReports()
+}
+
+class AccessControlSubsystem {
+    - roleId: String
+    - roleName: String
+    + assignRole()
+    + checkPermissions()
+}
+
+class DataStorageSubsystem {
+    - databaseName: String
+    - databaseType: String
+    + storeData()
+    + retrieveData()
+    + deleteData()
+}
+
+class LoggingSubsystem {
+    - logId: String
+    - logType: String
+    + logEvent()
+    + viewLogs()
+}
+
+class MonitoringSubsystem {
+    - componentId: String
+    - componentStatus: String
+    + monitorComponent()
+    + alertOnFailure()
+}
+
+ClientApplication --> AccessControlSubsystem
+AdminApplication --> AccessControlSubsystem
+ClientApplication --> DataStorageSubsystem
+AdminApplication --> DataStorageSubsystem
+AccessControlSubsystem --> LoggingSubsystem
+DataStorageSubsystem --> LoggingSubsystem
+LoggingSubsystem --> MonitoringSubsystem
+MonitoringSubsystem --> LoggingSubsystem
+@enduml
