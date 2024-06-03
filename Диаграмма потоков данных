@@ -1,0 +1,19 @@
+@startuml
+actor Buyer
+actor Admin
+
+Buyer --> (Client Application): Request Data
+(Client Application) --> (Access Control Subsystem): Verify Access
+(Access Control Subsystem) --> (Data Storage Subsystem): Access Data
+(Data Storage Subsystem) --> (Client Application): Provide Data
+(Client Application) --> Buyer: Display Data
+
+Admin --> (Admin Application): Manage Data
+(Admin Application) --> (Access Control Subsystem): Verify Access
+(Access Control Subsystem) --> (Data Storage Subsystem): Access Data
+(Data Storage Subsystem) --> (Admin Application): Provide Data
+(Admin Application) --> Admin: Display Data
+
+(Client Application) --> (Logging Subsystem): Log Event
+(Admin Application) --> (Logging Subsystem): Log Event
+@enduml
