@@ -1,0 +1,24 @@
+@startuml
+|Buyer|
+start
+:Login;
+:Browse Products;
+:Select Product;
+:View Product Details;
+if (Add to Cart?) then (yes)
+    :Add Product to Cart;
+else (no)
+    :Continue Browsing;
+endif
+:Checkout;
+:Enter Payment Details;
+:Confirm Order;
+stop
+
+|Admin|
+start
+:Login;
+:Manage Products;
+:View Reports;
+stop
+@enduml
